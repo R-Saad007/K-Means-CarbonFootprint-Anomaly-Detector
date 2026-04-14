@@ -1,0 +1,87 @@
+# --- Project data (client-confidential, must never be committed) ------------
+data/
+*.xlsx
+AxIn headers_annotated.xlsx*
+AxIn headers_annotated.xlsx - siteinfra.csv
+AxIn headers_annotated.xlsx - performancedaily.csv
+
+# --- Claude Code workspace (local assistant state, never commit) ------------
+.claude/
+
+# --- Python -----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.eggs/
+build/
+dist/
+develop-eggs/
+downloads/
+eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.manifest
+*.spec
+pip-log.txt
+pip-delete-this-directory.txt
+MANIFEST
+
+# --- Virtual environments ---------------------------------------------------
+.venv/
+venv/
+env/
+ENV/
+.env
+.env.*
+!.env.example
+
+# --- Testing & coverage -----------------------------------------------------
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+coverage.xml
+*.cover
+.hypothesis/
+nosetests.xml
+
+# --- Type checking / linting ------------------------------------------------
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+
+# --- ML / notebook artefacts ------------------------------------------------
+*.pkl
+*.joblib
+*.h5
+*.ipynb_checkpoints/
+mlruns/
+
+# --- IDE / editor -----------------------------------------------------------
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.DS_Store
+Thumbs.db
+
+# --- Logs -------------------------------------------------------------------
+*.log
+logs/
+
+# --- Docker -----------------------------------------------------------------
+.dockerignore.local
