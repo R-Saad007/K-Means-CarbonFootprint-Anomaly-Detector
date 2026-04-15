@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # AI-Driven Carbon Efficiency Benchmarking
 
 A production-ready FastAPI microservice that transforms passive telecom network
@@ -71,14 +71,14 @@ requirements.txt
 All endpoints are versioned under `/api/v1` so that breaking changes can
 coexist with the stable surface agents depend on.
 
-| Method | Path                                     | Purpose                                                     |
-|--------|------------------------------------------|-------------------------------------------------------------|
-| POST   | `/api/v1/ingest`                         | Trigger ETL of the two source sheets.                       |
-| POST   | `/api/v1/cluster`                        | Train K-Means, compute per-cluster baselines.               |
-| GET    | `/api/v1/anomalies?refresh=true`         | Evaluate & return NOC tickets.                              |
-| GET    | `/api/v1/sites/{site_id}/peer-analysis`  | Cluster context for one site (mandatory for agent workflows). |
-| GET    | `/healthz`                               | Liveness probe.                                             |
-| GET    | `/docs`                                  | Interactive OpenAPI UI.                                     |
+| Method | Path                                      | Purpose                                                       |
+| ------ | ----------------------------------------- | ------------------------------------------------------------- |
+| POST   | `/api/v1/ingest`                        | Trigger ETL of the two source sheets.                         |
+| POST   | `/api/v1/cluster`                       | Train K-Means, compute per-cluster baselines.                 |
+| GET    | `/api/v1/anomalies?refresh=true`        | Evaluate & return NOC tickets.                                |
+| GET    | `/api/v1/sites/{site_id}/peer-analysis` | Cluster context for one site (mandatory for agent workflows). |
+| GET    | `/healthz`                              | Liveness probe.                                               |
+| GET    | `/docs`                                 | Interactive OpenAPI UI.                                       |
 
 ### Typical lifecycle
 
@@ -113,6 +113,7 @@ fuzzy matching (`_find_col`). Vendor exports historically drift
 vendor feed rarely breaks the pipeline.
 
 **Tradeoff.** Fuzzy matching vs. a strict schema:
+
 - **Chosen**: tolerance — accept many column name variants, fall back to
   sensible defaults (`0.0` for missing capacity; default grid EF for unknown
   region). Better developer / operator ergonomics.
@@ -152,6 +153,7 @@ is safer than an invisible zero.
 ### Vectorised vs. per-site
 
 Two entry points exist intentionally:
+
 - **`calculate_site_co2(site_id, date, store)`** — matches the spec's
   reference signature; used by per-site lookups and tests.
 - **`compute_co2_dataframe(perf_df, infra_df)`** — vectorised form used by
@@ -185,6 +187,7 @@ All numeric features are `StandardScaler`-normalised before K-Means.
 `CARBON_KMEANS_K` env var.
 
 **Tradeoff.**
+
 - **Chosen**: auto-K via silhouette. Adapts as the fleet grows or as new site
   classes appear, no manual re-tuning needed.
 - **Rejected**: hardcoded K. Simpler, but requires operator intervention any
@@ -251,6 +254,7 @@ action, and humans get context without extra parsing.
 DataFrames and the current `ClusterState`. Access is guarded by an `RLock`.
 
 **Tradeoff.**
+
 - **Chosen**: in-memory store. Daily workloads easily fit in RAM (thousands
   of sites × a handful of KB each). Zero external dependencies for POC and
   first-production deployments.
@@ -289,11 +293,11 @@ are required to run the suite.
 
 Coverage:
 
-| File                     | What it proves                                                         |
-|--------------------------|------------------------------------------------------------------------|
-| `test_carbon.py`         | Diesel × 2.68; solar = 0; provincial EF; unknown-region fallback.      |
-| `test_clustering.py`     | Digital peers land together; baselines are exactly the cluster median. |
-| `test_anomaly.py`        | 20% threshold boundary; Hub exemption is unconditional; ticket shape.  |
+| File                   | What it proves                                                         |
+| ---------------------- | ---------------------------------------------------------------------- |
+| `test_carbon.py`     | Diesel × 2.68; solar = 0; provincial EF; unknown-region fallback.     |
+| `test_clustering.py` | Digital peers land together; baselines are exactly the cluster median. |
+| `test_anomaly.py`    | 20% threshold boundary; Hub exemption is unconditional; ticket shape.  |
 
 ```bash
 python -m pytest -q     # 16 passed, ~20 s
@@ -342,15 +346,15 @@ The image runs as a non-root `appuser`, exposes `:8000`, and ships a
 
 All knobs are env-var driven, prefix `CARBON_`:
 
-| Env var                              | Default                                          | Notes                                 |
-|--------------------------------------|--------------------------------------------------|---------------------------------------|
-| `CARBON_DATA_DIR`                    | `./data`                                         | Where the two CSVs live.              |
-| `CARBON_DIESEL_EF_KG_PER_L`          | `2.68`                                           | Spec-mandated; do not change lightly. |
-| `CARBON_DEFAULT_GRID_EF_KG_PER_KWH`  | `0.40`                                           | Fallback for unknown regions.         |
-| `CARBON_KMEANS_K`                    | *(auto via silhouette)*                          | Pin K if desired.                     |
-| `CARBON_KMEANS_K_MIN` / `_MAX`       | `3` / `8`                                        | Silhouette search range.              |
-| `CARBON_KMEANS_RANDOM_STATE`         | `42`                                             | Reproducibility seed.                 |
-| `CARBON_ANOMALY_THRESHOLD_PCT`       | `20.0`                                           | Spec-mandated strict threshold.       |
+| Env var                               | Default                   | Notes                                 |
+| ------------------------------------- | ------------------------- | ------------------------------------- |
+| `CARBON_DATA_DIR`                   | `./data`                | Where the two CSVs live.              |
+| `CARBON_DIESEL_EF_KG_PER_L`         | `2.68`                  | Spec-mandated; do not change lightly. |
+| `CARBON_DEFAULT_GRID_EF_KG_PER_KWH` | `0.40`                  | Fallback for unknown regions.         |
+| `CARBON_KMEANS_K`                   | *(auto via silhouette)* | Pin K if desired.                     |
+| `CARBON_KMEANS_K_MIN` / `_MAX`    | `3` / `8`             | Silhouette search range.              |
+| `CARBON_KMEANS_RANDOM_STATE`        | `42`                    | Reproducibility seed.                 |
+| `CARBON_ANOMALY_THRESHOLD_PCT`      | `20.0`                  | Spec-mandated strict threshold.       |
 
 ---
 
@@ -367,6 +371,14 @@ All knobs are env-var driven, prefix `CARBON_`:
   a day.
 - **Scope 3 is out of scope** (no backhaul embodied carbon, no hardware
   lifecycle emissions). Add when inventory sheet carries the fields.
-=======
+  =======
+
 # K-Means-CarbonFootprint-Anomaly-Detector
+
 >>>>>>> 31dad6f54b6dfa76c8655e1ae76d73167e3e7586
+>>>>>>>
+>>>>>>
+>>>>>
+>>>>
+>>>
+>>
