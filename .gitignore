@@ -85,3 +85,7 @@ logs/
 
 # --- Docker -----------------------------------------------------------------
 .dockerignore.local
+
+# claude
+.claude/
+CLAUDE.md

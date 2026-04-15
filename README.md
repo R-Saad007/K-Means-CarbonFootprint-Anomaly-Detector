@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # AI-Driven Carbon Efficiency Benchmarking
 
 A production-ready FastAPI microservice that transforms passive telecom network
@@ -366,3 +367,6 @@ All knobs are env-var driven, prefix `CARBON_`:
   a day.
 - **Scope 3 is out of scope** (no backhaul embodied carbon, no hardware
   lifecycle emissions). Add when inventory sheet carries the fields.
+=======
+# K-Means-CarbonFootprint-Anomaly-Detector
+>>>>>>> 31dad6f54b6dfa76c8655e1ae76d73167e3e7586
